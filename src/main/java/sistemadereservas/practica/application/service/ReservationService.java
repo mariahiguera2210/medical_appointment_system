@@ -1,42 +1,40 @@
 package sistemadereservas.practica.application.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sistemadereservas.practica.application.exception.ReservationException;
 import sistemadereservas.practica.application.message.EMessage;
-import sistemadereservas.practica.domain.entity.Reservation;
-import sistemadereservas.practica.repository.ReservationRepository;
+import sistemadereservas.practica.domain.entity.Appointment;
+import sistemadereservas.practica.repository.AppointmentRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public record ReservationService(
-        ReservationRepository reservationRepository
+        AppointmentRepository appointmentRepository
 ) {
 
 
-    public void createReservation(Reservation reservation){
-        reservationRepository.save(reservation);
+    public void createReservation(Appointment appointment){
+        appointmentRepository.save(appointment);
     }
 
-    public List<Reservation> getAllReservations() {
-        return reservationRepository.findAll();
+    public List<Appointment> getAllReservations() {
+        return appointmentRepository.findAll();
     }
 
-    public Optional<Reservation> getReservationById(Integer id) {
-        return reservationRepository.findById(id);
+    public Optional<Appointment> getReservationById(Integer id) {
+        return appointmentRepository.findById(id);
     }
 
     public void removeReservation(Integer id){
-        Reservation reservation = reservationRepository.findById(id)
+        Appointment appointment = appointmentRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException(EMessage.RESERVATION_NOT_FOUND.getMessage()));
 
-        reservationRepository.delete(reservation);
+        appointmentRepository.delete(appointment);
     }
 
-    public void updateReservation(Reservation reservation){
-        reservationRepository.save(reservation);
+    public void updateReservation(Appointment appointment){
+        appointmentRepository.save(appointment);
     }
 
 }

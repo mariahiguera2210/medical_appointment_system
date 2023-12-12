@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sistemadereservas.practica.application.exception.ReservationException;
 import sistemadereservas.practica.application.service.ReservationService;
-import sistemadereservas.practica.domain.entity.Reservation;
+import sistemadereservas.practica.domain.entity.Appointment;
 
 @RestController
 @RequestMapping("api/reservation")
@@ -14,8 +14,8 @@ public record ReservationController(
 ) {
 
     @PostMapping("/reservation")
-    public ResponseEntity<?> createReservation(@RequestBody Reservation reservation){
-        reservationService.createReservation(reservation);
+    public ResponseEntity<?> createReservation(@RequestBody Appointment appointment){
+        reservationService.createReservation(appointment);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -32,8 +32,8 @@ public record ReservationController(
     }
 
     @PutMapping
-    public ResponseEntity<?> updateReservation(@RequestBody Reservation reservation){
-        reservationService.updateReservation(reservation);
+    public ResponseEntity<?> updateReservation(@RequestBody Appointment appointment){
+        reservationService.updateReservation(appointment);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
