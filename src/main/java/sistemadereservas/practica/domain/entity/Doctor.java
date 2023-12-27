@@ -2,7 +2,6 @@ package sistemadereservas.practica.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.Objects;
 
 @Getter
