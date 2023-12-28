@@ -1,5 +1,4 @@
 package sistemadereservas.practica.application.service;
-
 import org.springframework.stereotype.Service;
 import sistemadereservas.practica.application.message.EMessage;
 import sistemadereservas.practica.domain.dto.AppointmentDto;
@@ -14,7 +13,6 @@ public record AppointmentService(
         AppointmentRepository appointmentRepository
 ) {
 
-
     public void createAppointment(AppointmentDto appointmentDto) {
         Appointment appointment = Appointment.builder()
                 .appointmentDate(appointmentDto.appointmentDate())
@@ -22,7 +20,6 @@ public record AppointmentService(
                 .confirmed(appointmentDto.confirmed())
                 .build();
         appointmentRepository.save(appointment);
-
     }
 
     public List<Appointment> getAllAppointments() {

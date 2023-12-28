@@ -12,7 +12,6 @@ import sistemadereservas.practica.domain.dto.AppointmentDto;
 public record AppointmentController(
        AppointmentService appointmentService
 ) {
-
     @PostMapping("/create")
     public ResponseEntity<?> createReservation(@RequestBody AppointmentDto appointmentDto){
         appointmentService.createAppointment(appointmentDto);
@@ -30,8 +29,6 @@ public record AppointmentController(
         return new ResponseEntity<>(appointmentService.findAppointmentById(id), HttpStatus.OK);
 
     }
-
-
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<?> removeReservation(@PathVariable("id") Integer id)
