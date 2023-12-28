@@ -1,9 +1,8 @@
 package sistemadereservas.practica.application.controller;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sistemadereservas.practica.application.exception.ReservationException;
+import sistemadereservas.practica.repository.ReservationException;
 import sistemadereservas.practica.application.service.AppointmentService;
 import sistemadereservas.practica.domain.dto.AppointmentDto;
 
@@ -13,7 +12,7 @@ public record AppointmentController(
        AppointmentService appointmentService
 ) {
     @PostMapping("/create")
-    public ResponseEntity<?> createReservation(@RequestBody AppointmentDto appointmentDto){
+    public ResponseEntity<?> createAppointment(@RequestBody AppointmentDto appointmentDto){
         appointmentService.createAppointment(appointmentDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -42,6 +41,5 @@ public record AppointmentController(
         appointmentService.updateAppointment(appointmentDto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 
 }

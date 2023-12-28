@@ -1,7 +1,7 @@
-package sistemadereservas.practica.application.exception;
+package sistemadereservas.practica.repository;
 
 import org.springframework.http.HttpStatus;
-import sistemadereservas.practica.application.message.EMessage;
+import sistemadereservas.practica.application.lasting.EMessage;
 
 public class ReservationException extends Exception{
 
