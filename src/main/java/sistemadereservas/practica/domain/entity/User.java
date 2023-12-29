@@ -2,7 +2,11 @@ package sistemadereservas.practica.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import sistemadereservas.practica.application.lasting.ERol;
 
+import java.util.Collection;
 import java.util.Objects;
 
 @Getter
@@ -12,8 +16,11 @@ import java.util.Objects;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name =  "\"user\"")
-public class User {
+// Luego de modificar el entity, se crea el respositorio
+// 1. Definir una restriccion de unicidad, no pueden haber dos usuarios con el mismo email
+@Table(name =  "\"user\"", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
+//3. Implementacion del user detail, se coloca implementar todos
+     public class User implements UserDetails {
 
     @Id
     @SequenceGenerator(
@@ -31,6 +38,10 @@ public class User {
     private String password;
     private Boolean enable;
 
+    //2. Creo el rol Enum
+    @Enumerated(EnumType.ORDINAL)
+    private ERol rol;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,4 +55,45 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, name, email, password, enable);
     }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+    //4. poner return this.email, el campo con el que se va a hacer el login
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+    //se agrega getPassword de la interface, de userDetales
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+    //5. cambiar return de false a true, para indicar que nada ha expirado
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+    //6. cambiar return de false a true
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+    //7. cambiar return de false a true
+
+    @Override
+    public boolean isEnabled() {
+        return this.enable;
+    }
+    //8. cambiar return de false a this.enable, que valide con el atributo si el usuario esta activo o no
 }

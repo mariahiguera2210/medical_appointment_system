@@ -1,10 +1,8 @@
 package sistemadereservas.practica.application.controller;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sistemadereservas.practica.application.service.DoctorService;
-import sistemadereservas.practica.domain.dto.AppointmentDto;
 import sistemadereservas.practica.domain.dto.DoctorDto;
 import sistemadereservas.practica.repository.ReservationException;
 
@@ -36,9 +34,5 @@ public record DoctorController(
          doctorService.updateDoctor(doctorDto);
          return new ResponseEntity<>(HttpStatus.NO_CONTENT);
      }
-
-
-
-
 
 }
