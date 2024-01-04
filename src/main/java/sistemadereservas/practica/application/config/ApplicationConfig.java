@@ -20,9 +20,7 @@ public class ApplicationConfig {
 
     private final UserRespository userRespository;
 
-    private final String[] WHITE_LIST_URL = {
 
-    };
     @Bean //conexion entre userDetailService y la base de dtos
     public UserDetailsService userDetailsService(){
         return username -> userRespository.findUsersByEmail(username)

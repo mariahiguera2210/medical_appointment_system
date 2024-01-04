@@ -19,11 +19,15 @@ public class SecurityConfig {
     private final AuthenticationProvider authenticationProvider;
     // el authenticationProvider se crea en ApplicationConfig
 
+    private final String[] WHITE_LIST_URL = {
+            "/api/v1/auth/**"
+    };
+
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
          http.csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        req-> req.requestMatchers("")
+                        req-> req.requestMatchers(WHITE_LIST_URL)
                                 // aca van las rutas conocidas como la lista blanca, rutas sin autenticacion
                                 .permitAll()
                                 .anyRequest()
