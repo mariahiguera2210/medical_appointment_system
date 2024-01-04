@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import sistemadereservas.practica.application.lasting.ERol;
+import sistemadereservas.practica.application.lasting.ERole;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -18,8 +18,11 @@ import java.util.Objects;
 @Entity
 // Luego de modificar el entity, se crea el respositorio
 // 1. Definir una restriccion de unicidad, no pueden haber dos usuarios con el mismo email
+
 @Table(name =  "\"user\"", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
-//3. Implementacion del user detail, se coloca implementar todos
+
+//3. Implementacion del user detail, se coloca implementar todos. //
+// El userDatails ya tiene tdo para crear los filtros de autenticacion
      public class User implements UserDetails {
 
     @Id
@@ -40,7 +43,7 @@ import java.util.Objects;
 
     //2. Creo el rol Enum
     @Enumerated(EnumType.ORDINAL)
-    private ERol rol;
+    private ERole role;
 
     @Override
     public boolean equals(Object o) {

@@ -1,5 +1,5 @@
 package sistemadereservas.practica.application.lasting;
 
-public enum ERol {
+public enum ERole {
     USER
 }
