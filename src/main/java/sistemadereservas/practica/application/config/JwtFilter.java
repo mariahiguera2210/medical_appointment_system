@@ -43,6 +43,7 @@ public class JwtFilter extends OncePerRequestFilter {
             //se obtiene el componente del userDetaials a traves del email del usuario
 
             setAuthenticationToContext(request,jwt, userDetails);
+            filterChain.doFilter(request, response);
         }
     }
 
