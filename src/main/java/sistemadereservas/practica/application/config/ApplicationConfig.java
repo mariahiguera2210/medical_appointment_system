@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import sistemadereservas.practica.application.lasting.EMessage;
-import sistemadereservas.practica.repository.UserRepository;
+import sistemadereservas.practica.domain.repository.UserRepository;
 
 @Configuration
 @RequiredArgsConstructor

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import sistemadereservas.practica.application.lasting.EMessage;
 import sistemadereservas.practica.domain.dto.DoctorDto;
 import sistemadereservas.practica.domain.entity.Doctor;
-import sistemadereservas.practica.repository.DoctorRepository;
+import sistemadereservas.practica.domain.repository.DoctorRepository;
 
 import java.util.List;
 import java.util.Optional;

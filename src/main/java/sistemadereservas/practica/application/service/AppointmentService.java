@@ -3,7 +3,7 @@ import org.springframework.stereotype.Service;
 import sistemadereservas.practica.application.lasting.EMessage;
 import sistemadereservas.practica.domain.dto.AppointmentDto;
 import sistemadereservas.practica.domain.entity.Appointment;
-import sistemadereservas.practica.repository.AppointmentRepository;
+import sistemadereservas.practica.domain.repository.AppointmentRepository;
 
 import java.util.List;
 import java.util.Optional;

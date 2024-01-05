@@ -1,4 +1,4 @@
-package sistemadereservas.practica.repository;
+package sistemadereservas.practica.domain.repository;
 
 import org.hibernate.query.Page;
 import org.springframework.data.jpa.repository.JpaRepository;

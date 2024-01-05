@@ -9,7 +9,7 @@ public record UserDto(
         Integer id,
         String name,
         String email,
-        @JsonIgnore
+        @JsonIgnore(value = false)
         String password,
         Boolean enable,
         ERole role

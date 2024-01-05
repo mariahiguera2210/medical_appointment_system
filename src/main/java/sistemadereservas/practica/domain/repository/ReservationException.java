@@ -1,4 +1,4 @@
-package sistemadereservas.practica.repository;
+package sistemadereservas.practica.domain.repository;
 
 import org.springframework.http.HttpStatus;
 import sistemadereservas.practica.application.lasting.EMessage;

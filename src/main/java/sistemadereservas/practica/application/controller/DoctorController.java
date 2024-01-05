@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sistemadereservas.practica.application.service.DoctorService;
 import sistemadereservas.practica.domain.dto.DoctorDto;
-import sistemadereservas.practica.repository.ReservationException;
+import sistemadereservas.practica.domain.repository.ReservationException;
 
 @RestController
 @RequestMapping("/api/v1/doctor")
