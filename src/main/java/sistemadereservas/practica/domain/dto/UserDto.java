@@ -12,7 +12,6 @@ public record UserDto(
         @JsonIgnore
         String password,
         Boolean enable,
-
         ERole role
 ) {
 }

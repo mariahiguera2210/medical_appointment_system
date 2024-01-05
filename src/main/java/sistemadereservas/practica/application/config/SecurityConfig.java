@@ -1,6 +1,7 @@
 package sistemadereservas.practica.application.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -13,32 +14,28 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
 @RequiredArgsConstructor
+@EnableMethodSecurity
 public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
     private final AuthenticationProvider authenticationProvider;
-    // el authenticationProvider se crea en ApplicationConfig
 
     private final String[] WHITE_LIST_URL = {
             "/api/v1/auth/**",
             "/health"
     };
-
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-         http.csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        req-> req.requestMatchers(WHITE_LIST_URL)
-                                // aca van las rutas conocidas como la lista blanca, rutas sin autenticacion
+                        req -> req.requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()
-                ).sessionManagement(
-                        sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                ).authenticationProvider(authenticationProvider)
+                ).sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-                 return http.build();
+        return http.build();
     }
 }

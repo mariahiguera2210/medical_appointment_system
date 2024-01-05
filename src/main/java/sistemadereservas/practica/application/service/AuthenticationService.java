@@ -2,20 +2,19 @@ package sistemadereservas.practica.application.service;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import sistemadereservas.practica.application.lasting.ERole;
 import sistemadereservas.practica.domain.dto.AuthenticationDto;
 import sistemadereservas.practica.domain.dto.UserDto;
 import sistemadereservas.practica.domain.entity.User;
-import sistemadereservas.practica.repository.UserRespository;
+import sistemadereservas.practica.repository.UserRepository;
 
 @Service
 public record AuthenticationService(
-        UserRespository userRespository,
-        JwtService jwtService,
+        UserRepository userRepository,
         PasswordEncoder passwordEncoder,
+        JwtService jwtService,
         AuthenticationManager authenticationManager
 ) {
     public String register(UserDto userDto) {
@@ -26,20 +25,19 @@ public record AuthenticationService(
                 .role(ERole.USER)
                 .enable(true)
                 .build();
-        userRespository.save(user);
+        userRepository.save(user);
         return jwtService.generateToken(user);
     }
 
     public String authenticate(AuthenticationDto authenticationDto){
-        //el authenticationManager valida que la contraseña y correo sean correctos
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authenticationDto.email(),
                         authenticationDto.password()
                 )
         );
-        User user = userRespository.findUsersByEmail(authenticationDto.email())
-                .orElseThrow();
+        User user = userRepository.findUserByEmail(authenticationDto.email()).orElseThrow();
         return jwtService.generateToken(user);
     }
+
 }

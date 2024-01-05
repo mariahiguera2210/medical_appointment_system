@@ -12,17 +12,12 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
-// Luego de modificar el entity, se crea el respositorio
-// 1. Definir una restriccion de unicidad, no pueden haber dos usuarios con el mismo email
+@Table(name = "\"user\"", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
 
-@Table(name =  "\"user\"", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
-
-//3. Implementacion del user detail, se coloca implementar todos. //
-// El userDatails ya tiene tdo para crear los filtros de autenticacion
      public class User implements UserDetails {
 
     @Id

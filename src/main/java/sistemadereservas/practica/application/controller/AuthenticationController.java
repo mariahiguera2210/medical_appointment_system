@@ -16,7 +16,7 @@ public record AuthenticationController(
         AuthenticationService authenticationService
 ) {
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserDto userDto){
+    public ResponseEntity<?> register(@RequestBody UserDto userDto) {
         String token = authenticationService.register(userDto);
         return new ResponseEntity<>(token, HttpStatus.CREATED);
     }
