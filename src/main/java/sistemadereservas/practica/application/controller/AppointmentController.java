@@ -2,7 +2,7 @@ package sistemadereservas.practica.application.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sistemadereservas.practica.repository.ReservationException;
+import sistemadereservas.practica.domain.repository.ReservationException;
 import sistemadereservas.practica.application.service.AppointmentService;
 import sistemadereservas.practica.domain.dto.AppointmentDto;
 

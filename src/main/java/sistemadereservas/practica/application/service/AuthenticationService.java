@@ -8,7 +8,7 @@ import sistemadereservas.practica.application.lasting.ERole;
 import sistemadereservas.practica.domain.dto.AuthenticationDto;
 import sistemadereservas.practica.domain.dto.UserDto;
 import sistemadereservas.practica.domain.entity.User;
-import sistemadereservas.practica.repository.UserRepository;
+import sistemadereservas.practica.domain.repository.UserRepository;
 
 @Service
 public record AuthenticationService(
