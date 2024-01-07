@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import sistemadereservas.practica.application.lasting.ERole;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -39,6 +40,10 @@ import java.util.Objects;
     //2. Creo el rol Enum
     @Enumerated(EnumType.ORDINAL)
     private ERole role;
+
+    @OneToMany
+    @ToString.Exclude
+    private List<Appointment> appointmentList;
 
     @Override
     public boolean equals(Object o) {

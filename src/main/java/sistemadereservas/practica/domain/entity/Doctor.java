@@ -2,6 +2,8 @@ package sistemadereservas.practica.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -25,6 +27,10 @@ public class Doctor {
 
     private Integer id;
     private String name;
+
+    @OneToMany
+    @ToString.Exclude
+    private List<Appointment> appointmentList;
 
     @Override
     public boolean equals(Object o) {

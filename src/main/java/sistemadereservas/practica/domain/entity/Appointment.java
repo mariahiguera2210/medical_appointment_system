@@ -30,6 +30,13 @@ public class Appointment {
     private String reasonForVisit;
     private boolean confirmed;
 
+    @ManyToOne
+    @JoinColumn(name= "id_user")
+    private User user;
+    @ManyToOne
+    @JoinColumn(name= "id_doctor")
+    private Doctor doctor;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
