@@ -9,8 +9,8 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper extends IBaseMapper {
-    User toEntity(UserDto dto);
-    UserDto toDto(User entity);
-    List<User> toEntityList(List<UserDto> dtoList);
-    List<UserDto> toDtoList(List<User> entityList);
+    User toEntity(UserDto dto); //UserDto -> objeto User
+    UserDto toDto(User entity); //objeto User -> obejto UserDto
+    List<User> toEntityList(List<UserDto> dtoList); // lista UserDto -> lista User
+    List<UserDto> toDtoList(List<User> entityList); // lista User -> lista UserDto
 }

@@ -1,10 +1,13 @@
 package sistemadereservas.practica.application.controller;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sistemadereservas.practica.domain.repository.ReservationException;
+import sistemadereservas.practica.application.exception.BookingAppointsExceptions;
 import sistemadereservas.practica.application.service.AppointmentService;
 import sistemadereservas.practica.domain.dto.AppointmentDto;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/appointment")
@@ -12,33 +15,42 @@ public record AppointmentController(
        AppointmentService appointmentService
 ) {
     @PostMapping("/create")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> createAppointment(@RequestBody AppointmentDto appointmentDto){
         appointmentService.createAppointment(appointmentDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+    @GetMapping("/{offset}/{limit}")
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<?> getAllAppointments(
+            @PathVariable("offset") Integer offset,
+            @PathVariable("limit") Integer limit) throws BookingAppointsExceptions{
 
-    @GetMapping("/all")
-    public ResponseEntity<?> getAllAppointments(){
-        return new ResponseEntity<>(appointmentService.getAllAppointments(),HttpStatus.OK);
+            List<AppointmentDto> appointments = appointmentService.getAllAppointments(offset, limit);
+            return new ResponseEntity<>(appointments, HttpStatus.FOUND);
     }
 
     @GetMapping("search/{id}")
-    public ResponseEntity<?> getAppointmentById(@PathVariable("id") Integer id) {
-
-        return new ResponseEntity<>(appointmentService.findAppointmentById(id), HttpStatus.OK);
-
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<?> findAppointmentById(
+            @PathVariable("id") Integer id) throws BookingAppointsExceptions {
+        AppointmentDto appointment = appointmentService.findAppointmentById(id);
+        return new ResponseEntity<>(appointment, HttpStatus.FOUND);
     }
 
-    @DeleteMapping("delete/{id}")
-    public ResponseEntity<?> removeReservation(@PathVariable("id") Integer id)
-            throws ReservationException, ReservationException {
-        appointmentService.removeAppointment(id);
+    @PutMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<?> updateAppointment(
+            @PathVariable("id") Integer id,
+            @RequestBody AppointmentDto appointmentDto) throws BookingAppointsExceptions{
+        appointmentService.updateAppointment(id, appointmentDto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-    @PutMapping
-    public ResponseEntity<?> updateAppointment(@RequestBody AppointmentDto appointmentDto){
-        appointmentService.updateAppointment(appointmentDto);
+    @DeleteMapping("delete/{id}")
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<?> removeAppointment(@PathVariable("id") Integer id)
+            throws BookingAppointsExceptions {
+        appointmentService.removeAppointment(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
