@@ -7,15 +7,11 @@ import org.springframework.data.domain.PageRequest;
 import sistemadereservas.practica.application.exception.BookingAppointsExceptions;
 import sistemadereservas.practica.application.lasting.EMessage;
 import sistemadereservas.practica.application.mapper.DoctorMapper;
-import sistemadereservas.practica.domain.dto.AppointmentDto;
 import sistemadereservas.practica.domain.dto.DoctorDto;
-import sistemadereservas.practica.domain.entity.Appointment;
 import sistemadereservas.practica.domain.entity.Doctor;
 import sistemadereservas.practica.domain.repository.DoctorRepository;
-
-import javax.print.Doc;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public record DoctorService(
@@ -43,13 +39,6 @@ public record DoctorService(
         return mapper.toDto(doctor);
     }
 
-
-    public void updateDoctorInfo(Integer id, DoctorDto doctorDto) throws BookingAppointsExceptions{
-        doctorRepository.findById(id)
-                .orElseThrow(()-> new BookingAppointsExceptions(EMessage.DATA_NOT_FOUND));
-        Doctor doctor = mapper.toEntity(doctorDto);
-        doctorRepository.save(doctor);
-    }
 
     public void updateDoctor(Integer id, DoctorDto doctorDto) throws BookingAppointsExceptions{
        doctorRepository.findById(id)
