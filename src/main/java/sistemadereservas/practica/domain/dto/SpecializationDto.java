@@ -6,7 +6,6 @@ import sistemadereservas.practica.domain.entity.Doctor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record SpecializationDto(
         Integer id,
-        String name,
-        DoctorDto doctor
+        String name
 ) {
 }

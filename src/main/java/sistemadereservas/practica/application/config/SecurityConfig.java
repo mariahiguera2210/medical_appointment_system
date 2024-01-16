@@ -23,7 +23,10 @@ public class SecurityConfig {
 
     private final String[] WHITE_LIST_URL = {
             "/api/v1/auth/**",
-            "/health"
+            "/health",
+            "/swagger-ui/**",
+            "/v3/api-docs/**"
+
     };
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
