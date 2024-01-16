@@ -4,21 +4,19 @@ spring:
   application:
     name: reservas
   datasource:
+    password: 'maria123'
     url: jdbc:postgresql://localhost:5432/reservation-system
     username: reservas
-    password: maria123
     driver-class-name: org.postgresql.Driver
   jpa:
-    defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
     show-sql: true
     properties:
       hibernate:
-        format-sql: true
+        format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-
 application:
   security:
     jwt:
@@ -26,4 +24,3 @@ application:
       expiration: 86400000 # a day
       refresh-token:
         expiration: 604800000 # 7 days
-

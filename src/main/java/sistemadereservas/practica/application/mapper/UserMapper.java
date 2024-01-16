@@ -7,10 +7,12 @@ import sistemadereservas.practica.domain.entity.User;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper
 public interface UserMapper extends IBaseMapper {
     User toEntity(UserDto dto); //UserDto -> objeto User
     UserDto toDto(User entity); //objeto User -> obejto UserDto
     List<User> toEntityList(List<UserDto> dtoList); // lista UserDto -> lista User
     List<UserDto> toDtoList(List<User> entityList); // lista User -> lista UserDto
 }
+
+

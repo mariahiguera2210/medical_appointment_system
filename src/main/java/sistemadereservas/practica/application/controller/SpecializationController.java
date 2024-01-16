@@ -6,10 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sistemadereservas.practica.application.exception.BookingAppointsExceptions;
 import sistemadereservas.practica.application.service.SpecializationService;
-import sistemadereservas.practica.domain.dto.AppointmentDto;
 import sistemadereservas.practica.domain.dto.SpecializationDto;
-import sistemadereservas.practica.domain.entity.Specialization;
-
 import java.util.List;
 
 @RestController
@@ -58,10 +55,6 @@ public record SpecializationController(
         specializationService.removeSpecialization(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
-
-
 
 
 }

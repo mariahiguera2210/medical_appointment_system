@@ -32,6 +32,10 @@ public class Doctor {
     @ToString.Exclude
     private List<Appointment> appointmentList;
 
+    @OneToOne
+    @JoinColumn(name = "id_specialization")
+    private Specialization specialization;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

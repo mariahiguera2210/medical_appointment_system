@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import sistemadereservas.practica.application.exception.BookingAppointsExceptions;
 import sistemadereservas.practica.application.service.AppointmentService;
 import sistemadereservas.practica.domain.dto.AppointmentDto;
-
 import java.util.List;
 
 @RestController

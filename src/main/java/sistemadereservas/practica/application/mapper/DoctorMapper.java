@@ -7,7 +7,7 @@ import sistemadereservas.practica.domain.entity.Doctor;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper
 public interface DoctorMapper extends IBaseMapper {
     Doctor toEntity(DoctorDto dto);
     DoctorDto toDto(Doctor entity);
