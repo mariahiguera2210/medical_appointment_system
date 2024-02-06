@@ -29,7 +29,7 @@ public record AppointmentController(
             return new ResponseEntity<>(appointments, HttpStatus.FOUND);
     }
 
-    @GetMapping("search/{id}")
+    @GetMapping("/search/{id}")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> findAppointmentById(
             @PathVariable("id") Integer id) throws BookingAppointsExceptions {
@@ -45,7 +45,7 @@ public record AppointmentController(
         appointmentService.updateAppointment(id, appointmentDto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> removeAppointment(@PathVariable("id") Integer id)
             throws BookingAppointsExceptions {

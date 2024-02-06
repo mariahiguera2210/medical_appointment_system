@@ -14,7 +14,7 @@ public record DoctorController(
         DoctorService doctorService
 )
  {
-     @PostMapping("create")
+     @PostMapping("/create")
      @SecurityRequirement(name = "bearerAuth")
      public ResponseEntity<?> createDoctor(@RequestBody DoctorDto doctorDto){
          doctorService.createDoctor(doctorDto);
@@ -30,7 +30,7 @@ public record DoctorController(
          return new ResponseEntity<>(doctors, HttpStatus.OK);
      }
 
-     @GetMapping("search/{id}")
+     @GetMapping("/search/{id}")
      @SecurityRequirement(name = "bearerAuth")
      public ResponseEntity<?> findDoctorById(
              @PathVariable("id") Integer id) throws BookingAppointsExceptions {
@@ -47,7 +47,7 @@ public record DoctorController(
          return new ResponseEntity<>(HttpStatus.NO_CONTENT);
      }
 
-     @DeleteMapping("delete/{id}")
+     @DeleteMapping("/delete/{id}")
      @SecurityRequirement(name = "bearerAuth")
      public ResponseEntity<?> deleteDoctorById(@PathVariable("id") Integer id)
              throws BookingAppointsExceptions {

@@ -27,6 +27,7 @@ public class Doctor {
 
     private Integer id;
     private String name;
+    private String lastName;
 
     @OneToMany
     @ToString.Exclude
@@ -41,11 +42,11 @@ public class Doctor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Doctor doctor = (Doctor) o;
-        return Objects.equals(id, doctor.id) && Objects.equals(name, doctor.name);
+        return Objects.equals(id, doctor.id) && Objects.equals(name, doctor.name) && Objects.equals(lastName, doctor.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, lastName);
     }
 }

@@ -31,7 +31,7 @@ public record SpecializationController(
         return new ResponseEntity<>(specializations, HttpStatus.FOUND);
     }
 
-    @GetMapping("search/{id}")
+    @GetMapping("/search/{id}")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> findSpecializationById(@PathVariable("id") Integer id) throws BookingAppointsExceptions{
         SpecializationDto specialization = specializationService.findSpecializationById(id);
@@ -48,7 +48,7 @@ public record SpecializationController(
 
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> removeSpecialization(@PathVariable("id") Integer id)
             throws BookingAppointsExceptions {

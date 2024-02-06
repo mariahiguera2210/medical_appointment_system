@@ -10,7 +10,9 @@ public record AppointmentDto(
         @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         LocalDateTime appointmentDate,
         String reasonForVisit,
-        boolean confirmed
+        boolean confirmed,
+        UserDto user,
+        DoctorDto doctor
 ) {
 
 

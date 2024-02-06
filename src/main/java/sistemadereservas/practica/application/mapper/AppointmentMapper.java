@@ -7,7 +7,7 @@ import sistemadereservas.practica.domain.entity.Appointment;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper
 public interface AppointmentMapper extends IBaseMapper {
     Appointment toEntity(AppointmentDto dto);
     AppointmentDto toDto(Appointment entity);
