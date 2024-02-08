@@ -8,8 +8,6 @@ import sistemadereservas.practica.application.lasting.EMessage;
 import sistemadereservas.practica.application.mapper.AppointmentMapper;
 import sistemadereservas.practica.domain.dto.AppointmentDto;
 import sistemadereservas.practica.domain.entity.Appointment;
-import sistemadereservas.practica.domain.entity.Doctor;
-import sistemadereservas.practica.domain.entity.User;
 import sistemadereservas.practica.domain.repository.AppointmentRepository;
 import org.springframework.data.domain.Pageable;
 

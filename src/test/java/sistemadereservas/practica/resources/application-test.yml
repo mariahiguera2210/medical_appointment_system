@@ -1,0 +1,25 @@
+spring:
+
+  profiles:
+    active: test
+
+  datasource:
+    url: jdbc:h2:mem:student
+    username: sa
+    driver-class-name: org.h2.Driver
+    password: Test@123!
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
+
+application:
+  security:
+    jwt:
+      secret-key: d85193e2bdfe794b7f98a16924adf59d1e05bd7a8b157450fac917d0bf89e38b
+      expiration: 86400000 # a day
