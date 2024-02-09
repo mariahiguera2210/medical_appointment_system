@@ -1,14 +1,11 @@
 package sistemadereservas.practica.application.service;
 
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import sistemadereservas.practica.application.exception.BookingAppointsExceptions;
 import sistemadereservas.practica.application.lasting.ERole;
@@ -18,12 +15,10 @@ import sistemadereservas.practica.domain.dto.DoctorDto;
 import sistemadereservas.practica.domain.dto.UserDto;
 import sistemadereservas.practica.domain.entity.Appointment;
 import sistemadereservas.practica.domain.repository.AppointmentRepository;
-
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -98,7 +93,7 @@ class AppointmentServiceTest {
                 null);
 
         Appointment checkup = new Appointment(
-                2,
+                3,
                 LocalDateTime.of(2024, 2, 15, 14, 30),
                 "Checkup",
                 true,
@@ -120,7 +115,37 @@ class AppointmentServiceTest {
     }
 
     @Test
-    void findAppointmentById() {
+    void findAppointmentById() throws BookingAppointsExceptions{
+        final Integer id = 5;
+
+        AppointmentDto expectedDto = new AppointmentDto(
+                5,
+                LocalDateTime.of(2024, 2, 15, 14, 30),
+                "pain",
+                true,
+                null,
+                null);
+
+        Appointment pain = Appointment.builder()
+                .id(5)
+                .appointmentDate(LocalDateTime.of(2024, 2, 15, 14, 30))
+                .reasonForVisit("pain")
+                .confirmed(true)
+                .user(null)
+                .doctor(null)
+                .build();
+
+        when(mapper.toDto(pain)).thenReturn(expectedDto);
+        when(appointmentRepository.findById(id)).thenReturn(Optional.of(pain));
+        AppointmentDto appointmentResult = appointmentService.findAppointmentById(id);
+
+        assertEquals(expectedDto, appointmentResult);
+
+
+    }
+
+    @Test
+    void findAppointmentByIdNotReturnData() {
         final Integer id = 5;
         when(appointmentRepository.findById(id)).thenReturn(Optional.empty());
         assertThrows(BookingAppointsExceptions.class, () -> appointmentService.findAppointmentById(id));
@@ -161,6 +186,44 @@ class AppointmentServiceTest {
     }
 
     @Test
-    void removeAppointment() {
+    void testUpdateAppointmentNotReturnData(){
+        final Integer id = 1;
+        AppointmentDto appointmentDto = new AppointmentDto(5,
+                LocalDateTime.of(2024, 2, 15, 14, 30),
+                "pain",
+                true,
+                null,
+                null);
+        when(appointmentRepository.findById(id)).thenReturn(Optional.empty());
+
+        assertThrows(BookingAppointsExceptions.class, ()-> appointmentService.updateAppointment(id, appointmentDto));
+    }
+
+    @Test
+    void testRemoveAppointment() throws BookingAppointsExceptions{
+        final Integer id = 5;
+
+        Appointment appointment = Appointment.builder()
+                .id(5)
+                .appointmentDate(LocalDateTime.of(2024, 2, 15, 14, 30))
+                .reasonForVisit("pain")
+                .confirmed(true)
+                .user(null)
+                .doctor(null)
+                .build();
+        when(appointmentRepository.findById(id)).thenReturn(Optional.of(appointment));
+        appointmentService.removeAppointment(id);
+
+        verify(appointmentRepository).delete(appointment);
+    }
+
+    @Test
+    void testRemoveAppointmentNotReturnData() {
+        final Integer id = 2;
+
+        when(appointmentRepository.findById(id)).thenReturn(Optional.empty());
+        assertThrows(BookingAppointsExceptions.class, ()-> appointmentService.removeAppointment(id));
+
+
     }
 }
