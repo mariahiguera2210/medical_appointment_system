@@ -39,17 +39,9 @@ class AppointmentServiceTest {
             "maria@gmail.com",
             "maria123",
             true,
-            ERole.USER,
-            null
+            ERole.USER
     );
 
-    private final DoctorDto doctorDto = new DoctorDto(
-            1,
-            "Andres",
-            "Castro",
-            null,
-            null
-    );
 
     @Test
     void testCreateAppointment() {

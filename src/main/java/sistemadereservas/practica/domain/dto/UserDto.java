@@ -14,7 +14,6 @@ public record UserDto(
         @JsonIgnore(value = false)
         String password,
         Boolean enable,
-        ERole role,
-        List<AppointmentDto> appointmentList
+        ERole role
 ) {
 }
