@@ -25,11 +25,11 @@ public record UserService(
 
     public List<UserDto> findAllUser(Integer offset, Integer limit) throws BookingAppointsExceptions{
         Pageable pageable = PageRequest.of(offset, limit);
-        Page<User> breweries = userRepository.findAll(pageable);
-        if (breweries.getContent().isEmpty()) {
+        Page<User> users = userRepository.findAll(pageable);
+        if (users.getContent().isEmpty()) {
             throw new BookingAppointsExceptions(EMessage.DATA_NOT_FOUND);
         }
-        return mapper.toDtoList(breweries.getContent());
+        return mapper.toDtoList(users.getContent());
     }
 
     public UserDto findUserById(Integer id) throws BookingAppointsExceptions {

@@ -1,6 +1,4 @@
 package sistemadereservas.practica.application.service;
-
-import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -8,21 +6,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import sistemadereservas.practica.application.exception.BookingAppointsExceptions;
 import sistemadereservas.practica.application.mapper.DoctorMapper;
 import sistemadereservas.practica.domain.dto.DoctorDto;
 import sistemadereservas.practica.domain.entity.Doctor;
 import sistemadereservas.practica.domain.repository.DoctorRepository;
-
 import java.util.Arrays;
-
-import javax.print.Doc;
-
 import java.util.List;
 import java.util.Optional;
-
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -128,7 +119,33 @@ class DoctorServiceTest {
     }
 
     @Test
-    void updateDoctor() {
+    void updateDoctor() throws BookingAppointsExceptions {
+        Integer id = 1;
+
+        DoctorDto doctorDto = new DoctorDto(
+                1,
+                "Josh",
+                "Rodgers",
+                null
+        );
+
+        Doctor doctorDataBase = Doctor.builder()
+                .id(1)
+                .name("Kyle")
+                .lastName("Rodgers")
+                .specialization(null)
+                .build();
+
+        Doctor doctor = Doctor.builder()
+                .id(1)
+                .name("Josh")
+                .lastName("Rdogers")
+                .specialization(null)
+                .build();
+
+        when(mapper.toEntity(doctorDto)).thenReturn(doctor);
+        when(doctorRepository.findById(id)).thenReturn(Optional.of(doctorDataBase));
+        doctorService.updateDoctor(id, doctorDto);
 
     }
 
