@@ -10,8 +10,7 @@ public record DoctorDto(
          Integer id,
          String name,
          String lastName,
-         SpecializationDto specialization,
-         List<AppointmentDto> appointmentList
+         SpecializationDto specialization
 
 ) {
 }

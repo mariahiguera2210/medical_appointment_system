@@ -79,7 +79,7 @@ class AuthenticationServiceTest {
     }
 
     @Test
-    void authenticate() {
+    void testAuthenticate() {
 
         when(userRepository.findUserByEmail(anyString())).thenReturn(Optional.of(sampleUser));
         when(jwtService.generateToken(any(User.class))).thenReturn("token");

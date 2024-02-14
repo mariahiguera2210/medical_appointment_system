@@ -11,7 +11,6 @@ import sistemadereservas.practica.application.exception.BookingAppointsException
 import sistemadereservas.practica.application.lasting.ERole;
 import sistemadereservas.practica.application.mapper.AppointmentMapper;
 import sistemadereservas.practica.domain.dto.AppointmentDto;
-import sistemadereservas.practica.domain.dto.DoctorDto;
 import sistemadereservas.practica.domain.dto.UserDto;
 import sistemadereservas.practica.domain.entity.Appointment;
 import sistemadereservas.practica.domain.repository.AppointmentRepository;
