@@ -1,4 +1,5 @@
 package sistemadereservas.practica.application.service;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -119,7 +120,7 @@ class DoctorServiceTest {
     }
 
     @Test
-    void updateDoctor() throws BookingAppointsExceptions {
+    void updateDoctorTest() throws BookingAppointsExceptions {
         Integer id = 1;
 
         DoctorDto doctorDto = new DoctorDto(
@@ -150,6 +151,30 @@ class DoctorServiceTest {
     }
 
     @Test
-    void removeDoctor() {
+    void removeDoctorTest() throws BookingAppointsExceptions {
+        Integer id = 1;
+        Doctor doctorFound = Doctor.builder()
+                .id(1)
+                .name("Kyle")
+                .lastName("Rodgers")
+                .specialization(null)
+                .build();
+
+        when(doctorRepository.findById(id)).thenReturn(Optional.of(doctorFound));
+        doctorService.removeDoctor(id);
+        verify(doctorRepository).delete(doctorFound);
+
     }
+    @Test
+    void  removeDoctorNotReturnDataTest(){
+        final Integer id = 50;
+
+        // When
+        when(doctorRepository.findById(id)).thenReturn(Optional.empty());
+
+        // Then
+        assertThrows(RuntimeException.class, () ->
+                doctorService.removeDoctor(id));
+    }
+
 }

@@ -1,11 +1,10 @@
 package sistemadereservas.practica.application.service;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -129,7 +128,7 @@ class UserServiceTest {
     }
 
     @Test
-    void testFindUserByIdNotReturnData() {
+    void findUserByIdNotReturnData() {
         final Integer id = 1;
         when(userRepository.findById(id)).thenReturn(Optional.empty());
         assertThrows(BookingAppointsExceptions.class, () -> userService.findUserById(id));
@@ -190,7 +189,7 @@ class UserServiceTest {
     }
 
     @Test
-    void testRemoveDoctorNotReturnData() {
+    void removeUserNotReturnDataTest() {
         // Given
         final Integer id = 50;
 
