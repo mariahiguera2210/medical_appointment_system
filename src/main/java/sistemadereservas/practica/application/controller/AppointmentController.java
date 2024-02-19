@@ -37,7 +37,7 @@ public record AppointmentController(
         return new ResponseEntity<>(appointment, HttpStatus.FOUND);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> updateAppointment(
             @PathVariable("id") Integer id,

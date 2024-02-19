@@ -25,7 +25,7 @@ public record UserController(
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/{offset}/{limit}")
+    @GetMapping("/find/{offset}/{limit}")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> findAllUser(
             @PathVariable("offset") Integer offset,
@@ -34,13 +34,13 @@ public record UserController(
         return new ResponseEntity<>(users, HttpStatus.FOUND);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/search/{id}")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> findUserById(@PathVariable("id") Integer id) throws BookingAppointsExceptions {
         UserDto user = userService.findUserById(id);
         return new ResponseEntity<>(user, HttpStatus.FOUND);
     }
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> updateUser(@PathVariable("id") Integer id, @RequestBody UserDto userDto)
             throws BookingAppointsExceptions {

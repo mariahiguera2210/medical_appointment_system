@@ -38,7 +38,7 @@ public record SpecializationController(
         return new ResponseEntity<>(specialization, HttpStatus.FOUND);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> updateSpecialization(
             @PathVariable("id") Integer id,
