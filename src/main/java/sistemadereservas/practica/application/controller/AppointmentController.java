@@ -17,16 +17,16 @@ public record AppointmentController(
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> createAppointment(@RequestBody AppointmentDto appointmentDto){
         appointmentService.createAppointment(appointmentDto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
-    @GetMapping("/{offset}/{limit}")
+    @GetMapping("/list/{offset}/{limit}")
     @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> getAllAppointments(
             @PathVariable("offset") Integer offset,
             @PathVariable("limit") Integer limit) throws BookingAppointsExceptions{
 
             List<AppointmentDto> appointments = appointmentService.getAllAppointments(offset, limit);
-            return new ResponseEntity<>(appointments, HttpStatus.FOUND);
+            return new ResponseEntity<>(appointments, HttpStatus.OK);
     }
 
     @GetMapping("/search/{id}")

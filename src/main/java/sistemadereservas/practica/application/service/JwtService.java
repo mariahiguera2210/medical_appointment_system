@@ -2,12 +2,15 @@ package sistemadereservas.practica.application.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import sistemadereservas.practica.domain.entity.User;
+
 import java.security.Key;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -31,9 +34,16 @@ public record JwtService(
         return generateToken(new HashMap<>(), userDetails);
     }
 
-    private String generateToken(HashMap<String, Object> extraClaims, UserDetails userDetails) {
-        return buildToken(extraClaims, userDetails, jwtExpiration);
-    }
+//    private String generateToken(HashMap<String, Object> extraClaims, UserDetails userDetails) {
+//        return buildToken(extraClaims, userDetails, jwtExpiration);
+//    }
+private String generateToken(HashMap<String, Object> extraClaims, UserDetails userDetails) {
+        if(userDetails instanceof User){
+            extraClaims.put("name", ((User) userDetails).getName());
+            extraClaims.put("id", ((User) userDetails).getId());
+        }
+    return buildToken(extraClaims, userDetails, jwtExpiration);
+}
     // despues de crear los metodos para los claims se crean los metodos para crear los tokens
     // este metodo se usa en el proceso de autenticacion
     private String buildToken(
@@ -53,6 +63,7 @@ public record JwtService(
                 .signWith(getSignKey(), SignatureAlgorithm.HS256) //firmar el token
                 .compact();
     }
+
 
     //claim: declaracion de los atributos que se utilizan para autorizar dentro del token
 
