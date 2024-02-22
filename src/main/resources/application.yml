@@ -2,11 +2,11 @@ server:
   port: 8080
 spring:
   application:
-    name: reservas
+    name: railway
   datasource:
-    password: 'maria123'
-    url: jdbc:postgresql://localhost:5432/reservation-system
-    username: reservas
+    password: 'EfE32b4B*E4Af2b6dBa2Dd*D1ffA*6AD'
+    url: jdbc:postgresql://monorail.proxy.rlwy.net:23994/railway
+    username: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
